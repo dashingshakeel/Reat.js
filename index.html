@@ -14,11 +14,21 @@
 
     var MessageBox = React.createClass({
       handleAdd: function(e){
-       console.log(this)
+        var newMessage = this.refs.newMessage.getDOMNode().value;
+        var newMessages = this.state.messages.concat([newMessage]);
+        this.setState({
+          messages: newMessages
+        });
+        
       },
       getInitialState: function(){
         return {
           isVisible: true,
+          messages: [
+                      'i like nabil',
+                      'nabil like alia',
+                      'alia like me'
+          ]
         }
       },
 
@@ -26,11 +36,15 @@
         var inlineStyles = {
           display: this.state.isVisible? 'block' : 'none'
         };
+        var messages = this.state.messages.map(function(message){
+          return <SubMessage message = {message} />;
+        });
 
         var subMessage = 'its not to see you';
         return (<div className = "container jumbotron" style = {inlineStyles}><h1>{this.props.titleMessage}</h1>
+        <input ref="newMessage" type="text" />
         <button className = "btn btn-primary" onClick= {this.handleAdd}>add</button>
-        <SubMessage message = {subMessage}/></div>
+          {messages}</div>
         );
       }
     });
