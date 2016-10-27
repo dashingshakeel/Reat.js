@@ -13,10 +13,12 @@
      /** @jsx React.DOM */
 
     var MessageBox = React.createClass({
+      handleAdd: function(e){
+       console.log(this)
+      },
       getInitialState: function(){
         return {
           isVisible: true,
-          messages: [' i m your dady','you r my baby','she is your mother','she is my wife too',2]
         }
       },
 
@@ -24,13 +26,11 @@
         var inlineStyles = {
           display: this.state.isVisible? 'block' : 'none'
         };
-        var messages = this.state.messages.map(function(message){
-          return <SubMessage message = {message}/>
-        });
 
         var subMessage = 'its not to see you';
         return (<div className = "container jumbotron" style = {inlineStyles}><h1>{this.props.titleMessage}</h1>
-        {messages}</div>
+        <button className = "btn btn-primary" onClick= {this.handleAdd}>add</button>
+        <SubMessage message = {subMessage}/></div>
         );
       }
     });
@@ -38,9 +38,6 @@
    
 
     var SubMessage = React.createClass({
-    propTypes: {
-      message: React.PropTypes.string.isRequired
-    },
       getDefaultProps: function(){
         return {
           message: 'its good to see yoy'
