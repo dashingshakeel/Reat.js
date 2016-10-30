@@ -18,7 +18,7 @@
 
      var DashBoard = React.createClass({
      loadData: function(){
-      $.get('http://gsr-demo.firebaseio-demo.com/'+this.props.url + '/.json')
+      return $.get('https://dash-5c50d.firebaseio.com/'+this.props.url +'/.json')
      },
      componentWillMount: function(){
       debugger;
