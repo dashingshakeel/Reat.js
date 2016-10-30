@@ -10,36 +10,44 @@
   <script src="http://fb.me/react-with-addons-0.11.1.js"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js"></script>
   <script src="http://fb.me/JSXTransformer-0.11.1.js"></script>
+
+  <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script type="text/jsx">
     /** @jsx React.DOM */
 
 
-     var App = React.createClass({
-     mixins: [React.addons.LinkedStateMixin],
+     var DashBoard = React.createClass({
+     loadData: function(){
+      $.get('http://gsr-demo.firebaseio-demo.com/'+this.props.url + '/.json')
+     },
+     componentWillMount: function(){
+      debugger;
+     },
+     componentDidMount: function(){
+      debugger;
+      this.loadData().then(function(data){
+        this.setState({
+         metric: data
+        });
+      }.bind(this));
+     },
+
      getInitialState: function(){
       return {
-        payment: 0,
-        payment2: 0
+        metric: 0
+        
       };
      },
      render: function(){
-     var total = parseInt(this.state.payment ,10) + parseInt(this.state.payment2 , 10);
       return (
-      <div>
-        <Payment valueLink={this.linkState('payment')}/>
-        <Payment valueLink={this.linkState('payment2')} />
-        {total}
-      </div>)
+        <div className="jumbotron">
+          <h2>{this.state.metric}</h2>
+        </div>)
      }
      });
-     var Payment = React.createClass({
-      render: function(){
-        return this.transferPropsTo(
-          <input type="text" />);
-      }
-     });
+    
      React.renderComponent(
-     <App/>,
+     <DashBoard url = "metric"/>,
      document.getElementById('app'));
     
   </script>
