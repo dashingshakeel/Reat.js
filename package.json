@@ -1,0 +1,23 @@
+{
+  "name": "reactjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "jsx --watch source/ build/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dashingshakeel/Reat.js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dashingshakeel/Reat.js/issues"
+  },
+  "homepage": "https://github.com/dashingshakeel/Reat.js#readme",
+  "dependencies": {
+    "react-tools": "^0.13.3"
+  }
+}
