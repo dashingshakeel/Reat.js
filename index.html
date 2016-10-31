@@ -10,8 +10,10 @@
   <script src="http://fb.me/react-with-addons-0.11.1.js"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js"></script>
   <script src="http://fb.me/JSXTransformer-0.11.1.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
-  <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
   <script type="text/jsx">
     /** @jsx React.DOM */
 
@@ -29,8 +31,10 @@
         this.setState({
          metric: data
         });
+      $('#tip').tooltip();
       }.bind(this));
      },
+
      componentWillReceiveProps: function(nextProp){
       var lastUrl = this.props.url;
       this.loadData(nextProp.url).then(function(data){
@@ -41,6 +45,10 @@
 
       }.bind(this));
 
+     },
+     componentWillUnmount: function(){
+      debugger;
+      $('#tip').tooltip('destroy');
      },
      shouldComponentUpdate: function(nextProps, nextState){
       return nextState.metric > 120
@@ -56,6 +64,7 @@
       return (
         <div className="jumbotron">
         {this.state.lastRout }
+          <a href="#" id="tip" data-toggle="tooltip" title="Hover!">Hover over me</a>
           <h2>{this.state.metric}</h2>
         
         </div>)
