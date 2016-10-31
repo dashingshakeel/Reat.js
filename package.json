@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "jsx --watch source/ build/"
+    "start": "browserify -t reactify ./source/app.js > ./build/app.js"
   },
   "repository": {
     "type": "git",
@@ -18,6 +18,12 @@
   },
   "homepage": "https://github.com/dashingshakeel/Reat.js#readme",
   "dependencies": {
+    "babel-preset-react": "^6.16.0",
+    "babelify": "^7.3.0",
+    "react": "^0.13.3",
     "react-tools": "^0.13.3"
+  },
+  "devDependencies": {
+    "reactify": "^1.1.1"
   }
 }
