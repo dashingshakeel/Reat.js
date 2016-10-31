@@ -21,19 +21,33 @@
       return $.get('https://dash-5c50d.firebaseio.com/'+this.props.url +'/.json')
      },
      componentWillMount: function(){
-      debugger;
+      //debugger;
      },
      componentDidMount: function(){
-      debugger;
+     // debugger;
       this.loadData().then(function(data){
         this.setState({
          metric: data
         });
       }.bind(this));
      },
+     componentWillReceiveProps: function(nextProp){
+      var lastUrl = this.props.url;
+      this.loadData(nextProp.url).then(function(data){
+        this.setState({
+          lastRout: lastUrl,
+          metric: data
+        });
 
+      }.bind(this));
+
+     },
+     shouldComponentUpdate: function(nextProps, nextState){
+      return nextState.metric > 120
+     },
      getInitialState: function(){
       return {
+        lastRout: '',
         metric: 0
         
       };
@@ -41,12 +55,14 @@
      render: function(){
       return (
         <div className="jumbotron">
+        {this.state.lastRout }
           <h2>{this.state.metric}</h2>
+        
         </div>)
      }
      });
     
-     React.renderComponent(
+     var dashComponent = React.renderComponent(
      <DashBoard url = "metric"/>,
      document.getElementById('app'));
     
